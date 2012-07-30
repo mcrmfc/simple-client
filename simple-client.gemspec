@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.name = "simple-client"
   s.version = SimpleClient::VERSION
 
-  s.authors = ["bbc_id"]
+  s.authors = ["matt robbins"]
   s.email = ["mcrobbins@gmail.com"]
   s.description = "simple wrapper for Net:HTTP"
 
