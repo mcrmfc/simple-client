@@ -1,0 +1,14 @@
+GEM
+  remote: http://rubygems.org/
+  specs:
+    addressable (2.2.8)
+    crack (0.3.1)
+    webmock (1.8.8)
+      addressable (~> 2.2.8)
+      crack (>= 0.1.7)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  webmock
