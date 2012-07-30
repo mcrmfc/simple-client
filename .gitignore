@@ -1,4 +1,18 @@
+#for bundler
 bin
 vendor
 .bundle
 pkg
+
+#for Rdoc
+rdoc
+
+#for gems
+pkg
+
+#for bim
+*.swp
+
+#for mac
+.DS_Store
+
