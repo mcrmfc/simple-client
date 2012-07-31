@@ -18,4 +18,7 @@ Gem::Specification.new do |s|
   s.rubygems_version = "1.3.6"
   s.summary = "simple wrapper for Net:HTTP"
 
+  s.add_development_dependency("rake")
+  s.add_development_dependency("webmock")
+
 end
