@@ -14,16 +14,14 @@ Features
 Example usage
 --------------
 
-{% highlight ruby %}
-#using api
-s = SimpleClient::Client.new
-s.request_headers = {'X-Test1'=>'foo', 'X-Test2' => 'bar'}
-s.get 'http://www.foo.co.uk/sport'
+     #using api
+     s = SimpleClient::Client.new
+     s.request_headers = {'X-Test1'=>'foo', 'X-Test2' => 'bar'}
+     s.get 'http://www.foo.co.uk/sport'
 
 
-#using api
-s = SimpleClient::Client.new
-response = s.get('http://www.foo.co.uk/sport', 
-     :headers => {'X-Test1'=>'foo', 'X-Test2' => 'bar'})
-{% endhighlight %}
+     #using api
+     s = SimpleClient::Client.new
+     response = s.get('http://www.foo.co.uk/sport', 
+                      :headers => {'X-Test1'=>'foo', 'X-Test2' => 'bar'})
 
