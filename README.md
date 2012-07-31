@@ -14,14 +14,26 @@ Features
 Example usage
 --------------
 
-     #using api
+     #Get - using api
      s = SimpleClient::Client.new
      s.request_headers = {'X-Test1'=>'foo', 'X-Test2' => 'bar'}
-     s.get 'http://www.foo.co.uk/sport'
+     response = s.get 'http://www.foo.co.uk/sport'
 
 
-     #using api
+     #Get - using config
      s = SimpleClient::Client.new
      response = s.get('http://www.foo.co.uk/sport', 
                       :headers => {'X-Test1'=>'foo', 'X-Test2' => 'bar'})
+
+    #Post - using api
+    s = SimpleClient::Client.new
+    s.request_headers = {'X-Test1'=>'foo', 'X-Test2' => 'bar'}
+    s.body = 'abc'
+    response = s.post 'http://www.foo.co.uk/sport'
+
+    #Post - using config
+    s = SimpleClient::Client.new
+    response = s.post('http://www.foo.co.uk/sport', 
+                      :headers => {'X-Test1'=>'foo', 'X-Test2' => 'bar'},
+                      :body => 'abc')
 
