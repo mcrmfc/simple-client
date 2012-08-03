@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    simple-client (0.0.1)
+    simple-client (0.0.2)
 
 GEM
   remote: http://rubygems.org/
