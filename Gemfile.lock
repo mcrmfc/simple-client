@@ -1,3 +1,8 @@
+PATH
+  remote: .
+  specs:
+    simple-client (0.0.1)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -12,5 +17,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  jruby-openssl (~> 0.7.7)
   rake
+  simple-client!
   webmock
