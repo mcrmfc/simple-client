@@ -171,6 +171,41 @@ class SimpleClient::ClientTest < Test::Unit::TestCase
     assert_equal({'cache-control' => 'private'}, s.response_headers)
   end
 
+  def test_post_with_request_and_response_headers_and_setting_x_www_form_urlencoding
+    #stub
+    stub_request(:post, "http://www.foo.co.uk/sport").
+      with(:body => {'foo' => 'bar', 'baz' => 'qux'}, :headers => {'X-Test1'=>'foo', 'X-Test2' => 'bar'}).
+      to_return(:status => 200, :headers => {'Cache-Control' => 'private'})
+
+    #run
+    s = SimpleClient::Client.new
+    s.post('http://www.foo.co.uk/sport', :headers => {'X-Test1'=>'foo', 'X-Test2' => 'bar', 'Content-Type' => 'application/x-www-form-urlencoded'}, :body => { 'foo'=>'bar', 'baz'=>'qux' })
+
+    #assert
+    assert_requested :post, "http://www.foo.co.uk/sport",
+      :headers => {'X-Test1'=>'foo', 'X-Test2' => 'bar'},
+      :body => "foo=bar&baz=qux", :times => 1    # ===> Success
+    assert_equal({'cache-control' => 'private'}, s.response_headers)
+  end
+
+ def test_post_with_request_and_response_header_and_setting_x_www_form_urlencoding_using_api
+    #stub
+    stub_request(:post, "http://www.foo.co.uk/sport").
+      with(:body => {'foo' => 'bar', 'baz' => 'qux'}, :headers => {'X-Test1'=>'foo', 'X-Test2' => 'bar'}).
+      to_return(:status => 200, :headers => {'Cache-Control' => 'private'})
+
+    #run
+    s = SimpleClient::Client.new
+    s.request_headers = {'X-Test1'=>'foo', 'X-Test2' => 'bar', 'Content-Type' => 'application/x-www-form-urlencoded'}
+    s.body = { 'foo'=>'bar', 'baz'=>'qux' } 
+    s.post 'http://www.foo.co.uk/sport'
+
+    #assert
+    assert_requested :post, "http://www.foo.co.uk/sport",
+      :headers => {'X-Test1'=>'foo', 'X-Test2' => 'bar'},
+      :body => "foo=bar&baz=qux", :times => 1    # ===> Success
+    assert_equal({'cache-control' => 'private'}, s.response_headers)
+  end
 
   def test_simple_put
     #stub

@@ -110,7 +110,7 @@ module SimpleClient
     # @return [Net::HTTPResponse] Net::HTTP Response object
     def request(url, params)
       connection = prepare_connection(url, params)
-      req = create_request(params[:body])
+      req = create_request(params[:body], params[:headers])
       do_request(req, params[:headers], connection)
     end
 
@@ -127,7 +127,7 @@ module SimpleClient
       connection.request req
     end
 
-    def create_request(body)
+    def create_request(body, headers=nil)
       raise "Not supported in base class"
     end
 
@@ -189,7 +189,7 @@ module SimpleClient
 
     protected 
 
-    def create_request(body)
+    def create_request(body, headers=nil)
       query = @parts[:query] ? "?#{@parts[:query]}" : ""
       Net::HTTP::Get.new(@parts[:path] + query)
     end
@@ -197,11 +197,18 @@ module SimpleClient
 
   class PostRequest < Request
 
+    attr_accessor :encoding
+
     protected 
 
-    def create_request(body)
+    def create_request(body, headers=nil)
       post = Net::HTTP::Post.new(@parts[:path])
-      post.body = body
+      if headers && headers['Content-Type'] == 'application/x-www-form-urlencoded'
+        headers.delete 'Content-Type' #Net:HTTP will add this
+        post.set_form_data(body) #x-www-form-urlencoded
+      else
+        post.body = body
+      end
       post
     end
   end
@@ -210,7 +217,7 @@ module SimpleClient
 
     protected 
 
-    def create_request(body)
+    def create_request(body, headers=nil)
       put = Net::HTTP::Put.new(@parts[:path])
       put.body = body
       put
@@ -221,7 +228,7 @@ module SimpleClient
 
     protected 
 
-    def create_request(body)
+    def create_request(body, headers=nil)
       Net::HTTP::Delete.new(@parts[:path])
     end
   end
