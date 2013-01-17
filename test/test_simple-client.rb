@@ -184,7 +184,7 @@ class SimpleClient::ClientTest < Test::Unit::TestCase
     #assert
     assert_requested :post, "http://www.foo.co.uk/sport",
       :headers => {'X-Test1'=>'foo', 'X-Test2' => 'bar'},
-      :body => "foo=bar&baz=qux", :times => 1    # ===> Success
+      :body => {'foo' => 'bar', 'baz' => 'qux'}, :times => 1    # ===> Success
     assert_equal({'cache-control' => 'private'}, s.response_headers)
   end
 
@@ -203,7 +203,7 @@ class SimpleClient::ClientTest < Test::Unit::TestCase
     #assert
     assert_requested :post, "http://www.foo.co.uk/sport",
       :headers => {'X-Test1'=>'foo', 'X-Test2' => 'bar'},
-      :body => "foo=bar&baz=qux", :times => 1    # ===> Success
+      :body => { 'foo'=>'bar', 'baz'=>'qux' }, :times => 1    # ===> Success
     assert_equal({'cache-control' => 'private'}, s.response_headers)
   end
 
